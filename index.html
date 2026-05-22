@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thamimul Ansari M — .NET Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161f;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --accent3: #38bdf8;
+    --text: #f0f0f5;
+    --muted: #8888a0;
+    --border: rgba(108,99,255,0.18);
+    --card: #13131c;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.02em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.13) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 1rem; border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(108,99,255,0.08);
+    font-size: 0.8rem; color: var(--accent2); margin-bottom: 1.8rem;
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; display: inline-block; }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  h1 .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); margin-bottom: 2.2rem;
+    font-weight: 300; letter-spacing: 0.01em;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2.5rem; }
+  .tag {
+    padding: 0.28rem 0.85rem; border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-size: 0.78rem; color: var(--accent3); font-weight: 400;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    padding: 0.7rem 1.8rem; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--accent); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.6rem;
+  }
+  .section-desc { color: var(--muted); font-size: 1rem; margin-bottom: 3rem; max-width: 520px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1;
+  }
+  .stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-card-title {
+    font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
+    color: var(--accent2); letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    padding: 0.22rem 0.65rem; border-radius: 999px;
+    background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+    font-size: 0.77rem; color: var(--text);
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .exp-card {
+    position: relative; margin-bottom: 2.5rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem 1.8rem;
+    transition: border-color 0.2s;
+  }
+  .exp-card::before {
+    content: ''; position: absolute; left: -2rem; top: 1.8rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    transform: translateX(-50%);
+  }
+  .exp-card:hover { border-color: var(--accent); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; }
+  .exp-company { color: var(--accent); font-size: 0.9rem; margin-top: 0.1rem; }
+  .exp-period {
+    font-size: 0.78rem; color: var(--muted); padding: 0.2rem 0.7rem;
+    border: 1px solid var(--border); border-radius: 999px; white-space: nowrap;
+  }
+  .exp-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1rem; }
+  .exp-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    padding: 0.18rem 0.6rem; border-radius: 6px;
+    background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2);
+    font-size: 0.75rem; color: var(--accent3);
+  }
+  .exp-badge {
+    display: inline-block; margin-top: 0.7rem;
+    font-size: 0.75rem; padding: 0.2rem 0.65rem; border-radius: 999px;
+    background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: #4ade80;
+  }
+
+  /* CERTIFICATES */
+  .certs-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .cert-add-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1.2rem; border-radius: 8px;
+    background: var(--accent); border: none; color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .cert-add-btn:hover { background: var(--accent2); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .cert-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cert-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(108,99,255,0.15); display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 1rem;
+  }
+  .cert-name { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .cert-issuer { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.2rem; }
+  .cert-date { font-size: 0.75rem; color: var(--muted); }
+  .cert-delete {
+    position: absolute; top: 0.8rem; right: 0.8rem;
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 1rem; padding: 0.2rem; border-radius: 4px; display: none;
+    transition: color 0.2s;
+  }
+  .cert-card:hover .cert-delete { display: block; }
+  .cert-delete:hover { color: #f87171; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center;
+    z-index: 200; padding: 1rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 18px; padding: 2rem; width: 100%; max-width: 480px;
+  }
+  .modal h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .form-group input {
+    width: 100%; padding: 0.65rem 1rem; border-radius: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus { border-color: var(--accent); }
+  .modal-btns { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .btn-cancel {
+    flex: 1; padding: 0.7rem; border-radius: 8px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-cancel:hover { border-color: var(--accent); color: var(--text); }
+  .btn-save {
+    flex: 1; padding: 0.7rem; border-radius: 8px;
+    background: var(--accent); border: none;
+    color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn-save:hover { background: var(--accent2); }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+  }
+  .edu-year { font-size: 0.75rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 500; }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .edu-inst { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .edu-score { font-size: 0.8rem; color: var(--accent3); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .contact-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: rgba(108,99,255,0.15);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .contact-lbl { font-size: 0.75rem; color: var(--muted); }
+  .contact-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    color: var(--muted); font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">T<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="padding-top: 0; max-width: 100%;">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">Available for opportunities</div>
+  <h1>Thamimul<br/>Ansari <span class="accent">M</span></h1>
+  <p class="hero-sub">.NET Developer &nbsp;·&nbsp; Lead Engineer &nbsp;·&nbsp; 5+ Years Experience</p>
+  <div class="hero-tags">
+    <span class="tag">ASP.NET Core</span>
+    <span class="tag">Microservices</span>
+    <span class="tag">Azure</span>
+    <span class="tag">SQL Server</span>
+    <span class="tag">C#</span>
+    <span class="tag">MVC</span>
+  </div>
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="#experience">View Experience</a>
+    <a class="btn btn-ghost" href="https://github.com/ThamimulAnsariM" target="_blank">GitHub ↗</a>
+    <a class="btn btn-ghost" href="#contact">Contact Me</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About Me</p>
+  <h2>High-energy<br/>Technocrat</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>A versatile Senior .NET Developer with nearly 5 years of successful career delivering prestigious projects of large magnitude within strict time schedules.</p>
+      <p>Experienced in ASP.NET Core, SQL Server, Windows and Web applications, and Azure cloud services. Strong background in design patterns (Singleton, Facade) and SDLC methodologies including Waterfall and Agile SCRUM.</p>
+      <p>Capable of managing projects end-to-end, right from requirement gathering to design and implementation. Known for timely delivery and earning client appreciation across multiple engagements.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-lbl">Years Experience</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Companies</div></div>
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-lbl">Major Projects</div></div>
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-lbl">Certifications</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Skills</p>
+  <h2>What I Work With</h2>
+  <p class="section-desc">A broad stack covering backend, frontend, cloud, and tooling.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">🔷 Core Technologies</div>
+      <div class="skill-tags">
+        <span class="skill-tag">.NET Core</span>
+        <span class="skill-tag">ASP.NET</span>
+        <span class="skill-tag">MVC5</span>
+        <span class="skill-tag">MVC Core</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Web API</span>
+        <span class="skill-tag">Microservices</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">🌐 Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">jQuery</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Razor</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">🗄️ Database</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL Server</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Stored Procedures</span>
+        <span class="skill-tag">Entity Framework</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">☁️ Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Azure (SAAS/PAAS/IAAS)</span>
+        <span class="skill-tag">IIS Hosting</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">SVN</span>
+        <span class="skill-tag">TFS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">🏗️ Architecture</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Dependency Injection</span>
+        <span class="skill-tag">Middlewares</span>
+        <span class="skill-tag">Singleton Pattern</span>
+        <span class="skill-tag">Facade Pattern</span>
+        <span class="skill-tag">SOLID Principles</span>
+        <span class="skill-tag">JWT Auth</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">🔧 Tools & Extras</div>
+      <div class="skill-tags">
+        <span class="skill-tag">JIRA</span>
+        <span class="skill-tag">SharePoint</span>
+        <span class="skill-tag">JMeter</span>
+        <span class="skill-tag">Dev Express</span>
+        <span class="skill-tag">Xunit</span>
+        <span class="skill-tag">Visual Studio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Work Experience</p>
+  <h2>Career Journey</h2>
+  <p class="section-desc">From building resilience platforms to banking APIs — every step forward.</p>
+  <div class="timeline">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Lead Engineer</div>
+          <div class="exp-company">HCLTech, Chennai</div>
+        </div>
+        <span class="exp-period">April 2025 – Present</span>
+      </div>
+      <p class="exp-desc"><strong>Truist Bank</strong> — Backend API development focusing on CIBIL score integration and loan processing modules. Implemented APIs to manage asset-based and non-asset-based loans ensuring compliance with business rules. Optimized data processing and validation for credit score evaluation and loan eligibility checks.</p>
+      <div class="exp-chips">
+        <span class="chip">.NET Core</span><span class="chip">Azure</span><span class="chip">Microservices</span>
+        <span class="chip">MVC Core</span><span class="chip">Xunit</span><span class="chip">Entity Framework</span>
+      </div>
+      <span class="exp-badge">⭐ Pat on Back — Timely Delivery</span>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Associate Consultant</div>
+          <div class="exp-company">Infosys Pvt. Ltd., Chennai</div>
+        </div>
+        <span class="exp-period">May 2024 – Dec 2024</span>
+      </div>
+      <p class="exp-desc"><strong>Core Identity</strong> — Tool to create and manage user accounts for Microsoft company employees with role-based access control for create, edit and view operations.</p>
+      <div class="exp-chips">
+        <span class="chip">C# .NET Core</span><span class="chip">Azure</span><span class="chip">jQuery</span>
+        <span class="chip">MVC Core</span><span class="chip">MsSql</span><span class="chip">Microservices</span>
+      </div>
+      <span class="exp-badge">⭐ Pat on Back — Timely Delivery</span>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Software Engineer</div>
+          <div class="exp-company">Perpetuuiti Technosoft Pvt. Ltd., Chennai</div>
+        </div>
+        <span class="exp-period">April 2021 – May 2024</span>
+      </div>
+      <p class="exp-desc">
+        <strong>Continuity Patrol V4.5 & V6.0</strong> — Resilience Automation Platform enabling organizations to recover from outages with lowest RPOs and fastest RTOs. Developed and created new features for client delivery teams. V6.0 selected for <em>Merit Award by Client</em>.<br/><br/>
+        <strong>Code Generator</strong> — Internal tool to auto-generate table stored procedures, Facade layers and new feature scaffolding for the Continuity Patrol solution.
+      </p>
+      <div class="exp-chips">
+        <span class="chip">ASP.NET MVC Core</span><span class="chip">C#</span><span class="chip">Facade Pattern</span>
+        <span class="chip">Entity Framework</span><span class="chip">JMeter</span><span class="chip">IIS Hosting</span>
+      </div>
+      <span class="exp-badge">🏆 Merit Award by Client &nbsp;·&nbsp; Multiple Pat on Back Awards</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="certs-header-row">
+    <div>
+      <p class="section-label">Certifications</p>
+      <h2>My Achievements</h2>
+    </div>
+    <button class="cert-add-btn" onclick="openModal()">+ Add Certificate</button>
+  </div>
+  <div class="certs-grid" id="certs-grid">
+    <!-- Default certs from CV -->
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <div class="cert-name">Introduction to Cybersecurity in SDLC</div>
+      <div class="cert-issuer">Professional Certification</div>
+      <div class="cert-date"></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔐</div>
+      <div class="cert-name">Data Privacy and Privacy by Design Foundation</div>
+      <div class="cert-issuer">DPO Official</div>
+      <div class="cert-date"></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔒</div>
+      <div class="cert-name">Secure SDLC Phases</div>
+      <div class="cert-issuer">Professional Certification</div>
+      <div class="cert-date"></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div class="cert-name">ASP .NET Web Application</div>
+      <div class="cert-issuer">Professional Certification</div>
+      <div class="cert-date"></div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-name">Harnessing the Disruption of Generative AI</div>
+      <div class="cert-issuer">Skillsoft Corporation</div>
+      <div class="cert-date">November 26, 2025 &nbsp;·&nbsp; 0.5 CPE Credits</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Education</p>
+  <h2>Academic Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2018</div>
+      <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+      <div class="edu-inst">Ponnaiyah Ramajayam Institute of Science and Technology, Thanjavur</div>
+      <div class="edu-score">CGPA: 7.95</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2014</div>
+      <div class="edu-degree">HSC</div>
+      <div class="edu-inst">Govt. Higher Secondary School Avoor, Thiruvarur Dist.</div>
+      <div class="edu-score">60.25%</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2012</div>
+      <div class="edu-degree">SSLC</div>
+      <div class="edu-inst">Govt. Higher Secondary School Avoor, Thiruvarur Dist.</div>
+      <div class="edu-score">64.00%</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2>Let's Connect</h2>
+  <p class="section-desc">Open to new opportunities. Feel free to reach out!</p>
+  <div class="contact-grid">
+    <a class="contact-card" href="tel:+919629181192">
+      <div class="contact-icon">📞</div>
+      <div><div class="contact-lbl">Phone</div><div class="contact-val">+91 9629181192</div></div>
+    </a>
+    <a class="contact-card" href="mailto:thamimulansari.moham@hcltech.com">
+      <div class="contact-icon">✉️</div>
+      <div><div class="contact-lbl">Email</div><div class="contact-val">thamimulansari.moham@hcltech.com</div></div>
+    </a>
+    <a class="contact-card" href="https://github.com/ThamimulAnsariM" target="_blank">
+      <div class="contact-icon">💻</div>
+      <div><div class="contact-lbl">GitHub</div><div class="contact-val">ThamimulAnsariM</div></div>
+    </a>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div><div class="contact-lbl">Location</div><div class="contact-val">Chennai, Tamil Nadu</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with ❤️ · Thamimul Ansari M · 2025</p>
+</footer>
+
+<!-- ADD CERT MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>Add Certificate</h3>
+    <div class="form-group">
+      <label>Certificate Name *</label>
+      <input type="text" id="cert-name" placeholder="e.g. AWS Solutions Architect"/>
+    </div>
+    <div class="form-group">
+      <label>Issuing Organization *</label>
+      <input type="text" id="cert-issuer" placeholder="e.g. Amazon Web Services"/>
+    </div>
+    <div class="form-group">
+      <label>Date (optional)</label>
+      <input type="text" id="cert-date" placeholder="e.g. January 2025"/>
+    </div>
+    <div class="form-group">
+      <label>Icon (emoji, optional)</label>
+      <input type="text" id="cert-icon" placeholder="e.g. ☁️" maxlength="4"/>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="addCert()">Save Certificate</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('modal-overlay').classList.add('active');
+    document.getElementById('cert-name').focus();
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.getElementById('cert-name').value = '';
+    document.getElementById('cert-issuer').value = '';
+    document.getElementById('cert-date').value = '';
+    document.getElementById('cert-icon').value = '';
+  }
+  function addCert() {
+    const name = document.getElementById('cert-name').value.trim();
+    const issuer = document.getElementById('cert-issuer').value.trim();
+    const date = document.getElementById('cert-date').value.trim();
+    const icon = document.getElementById('cert-icon').value.trim() || '🎓';
+    if (!name || !issuer) { alert('Please fill in the certificate name and issuer.'); return; }
+    const grid = document.getElementById('certs-grid');
+    const card = document.createElement('div');
+    card.className = 'cert-card';
+    card.innerHTML = `
+      <button class="cert-delete" onclick="this.parentElement.remove()" title="Remove">✕</button>
+      <div class="cert-icon">${icon}</div>
+      <div class="cert-name">${name}</div>
+      <div class="cert-issuer">${issuer}</div>
+      <div class="cert-date">${date}</div>
+    `;
+    grid.appendChild(card);
+    closeModal();
+  }
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
